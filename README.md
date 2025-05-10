@@ -30,8 +30,13 @@ A simple news aggregator application that fetches and displays news articles fro
    npm install
    ```
 
-3. Edit the API key in `src/App.js`:
-   Replace `YOUR_API_KEY` with your actual News API key.
+3. Set up your API key:
+   - Create a `.env` file in the root of your project
+   - Add your News API key as follows:
+   ```
+   REACT_APP_NEWS_API_KEY=your_actual_api_key_here
+   ```
+   - This file is included in .gitignore and will not be pushed to GitHub
 
 4. Start the development server:
    ```
@@ -46,6 +51,12 @@ This app uses the [News API](https://newsapi.org) which has the following limita
 - 100 requests per day
 - Only works in development mode (localhost) for the free plan
 - For production deployment, you'll need a paid plan
+
+## Security Best Practices
+
+- Never commit your API keys to GitHub
+- Always use environment variables for sensitive information
+- The `.env` file is added to .gitignore to prevent it from being committed
 
 ## License
 

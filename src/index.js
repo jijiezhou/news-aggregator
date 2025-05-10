@@ -3,6 +3,11 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 
+// Output environment variables for debugging
+console.log("Environment loaded in index.js:", {
+  REACT_APP_NEWS_API_KEY: process.env.REACT_APP_NEWS_API_KEY,
+});
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>

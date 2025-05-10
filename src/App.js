@@ -11,8 +11,10 @@ function App() {
   const [error, setError] = useState(null);
   const [category, setCategory] = useState('general');
   
-  // You can get a free API key from https://newsapi.org/
-  const API_KEY = 'YOUR_API_KEY'; // Replace with your News API key
+  // In Create React App, environment variables must be prefixed with REACT_APP_
+  const API_KEY = process.env.REACT_APP_NEWS_API_KEY || 'YOUR_API_KEY';
+  console.log("API_KEY being used:", API_KEY);
+  
   const API_URL = `https://newsapi.org/v2/top-headlines?country=us&category=${category}&apiKey=${API_KEY}`;
   
   useEffect(() => {
@@ -21,9 +23,9 @@ function App() {
         setLoading(true);
         
         // Check if API key is set, otherwise use mock data
-        if (API_KEY === 'YOUR_API_KEY') {
+        if (!API_KEY || API_KEY === 'YOUR_API_KEY') {
           // Using mock data since no API key is provided
-          console.log('Using mock data. Please replace YOUR_API_KEY with a valid News API key for real data.');
+          console.log('Using mock data. Please set REACT_APP_NEWS_API_KEY in your .env file for real data.');
           // Simulate API call delay
           setTimeout(() => {
             const filteredNews = mockData.articles.filter(article => 
@@ -36,6 +38,7 @@ function App() {
         }
         
         // Fetch real data from News API
+        console.log("Fetching from:", API_URL);
         const response = await axios.get(API_URL);
         setNews(response.data.articles);
         setLoading(false);
